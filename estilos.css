@@ -1,40 +1,52 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
+  font-family: sans-serif;
+  background: #fdfdfd;
   padding: 20px;
+  margin: 0;
 }
+
 h1 {
   text-align: center;
-}
-.semester {
   margin-bottom: 30px;
 }
-.semester h2 {
-  background: #333;
-  color: white;
-  padding: 10px;
+
+.malla-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
-.course {
-  display: inline-block;
+
+.semestre {
+  border: 2px solid #ccc;
+  padding: 10px;
   width: 250px;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 8px;
+  background: #f3f3f3;
+  border-radius: 10px;
+}
+
+.semestre h2 {
   text-align: center;
+}
+
+.ramo {
+  background-color: #ffc0cb; /* rosado */
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
+  user-select: none;
+  transition: all 0.2s;
 }
-.pending {
-  background-color: #f8c8dc;
-  color: black;
-}
-.approved {
-  background-color: #b19cd9;
-  color: white;
+
+.ramo.aprobado {
+  background-color: #9370db; /* morado */
   text-decoration: line-through;
+  color: white;
 }
-.locked {
-  background-color: #ccc;
-  color: #666;
+
+.ramo.bloqueado {
+  background-color: #cccccc;
   cursor: not-allowed;
+  color: #666;
 }
