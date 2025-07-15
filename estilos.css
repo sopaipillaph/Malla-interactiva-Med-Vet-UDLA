@@ -23,3 +23,25 @@
   gap: 1rem;
   justify-content: center;
 }
+
+.ramo {
+  background-color: #ffc0cb;
+  border: 2px solid #ff69b4;
+  border-radius: 10px;
+  padding: 0.8rem;
+  width: 200px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.ramo.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ramo.approved {
+  background-color: #ff69b4;
+  color: white;
+  text-decoration: line-through;
+}
