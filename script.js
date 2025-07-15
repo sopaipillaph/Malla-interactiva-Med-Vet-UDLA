@@ -1,43 +1,42 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const courses = document.querySelectorAll(".course");
 
-document.addEventListener("DOMContentLoaded", function () {
-    const ramos = document.querySelectorAll(".ramo");
+  function updateCourseStates() {
+    courses.forEach(course => {
+      const prereqs = course.dataset.prerequisites.split(",").filter(p => p);
+      const name = course.dataset.name;
+      const approved = JSON.parse(localStorage.getItem("approvedCourses") || "[]");
 
-    function actualizarEstado() {
-        ramos.forEach(ramo => {
-            const prereqs = ramo.dataset.prerrequisitos.split(",").filter(p => p);
-            const aprobados = JSON.parse(localStorage.getItem("aprobados") || "[]");
-
-            const todosAprobados = prereqs.every(p => aprobados.includes(p));
-            if (!todosAprobados && prereqs.length > 0 && !aprobados.includes(ramo.id)) {
-                ramo.classList.add("bloqueado");
-                ramo.classList.remove("pendiente", "aprobado");
-            } else if (aprobados.includes(ramo.id)) {
-                ramo.classList.add("aprobado");
-                ramo.classList.remove("pendiente", "bloqueado");
-            } else {
-                ramo.classList.add("pendiente");
-                ramo.classList.remove("aprobado", "bloqueado");
-            }
-        });
-    }
-
-    ramos.forEach(ramo => {
-        ramo.addEventListener("click", function () {
-            const aprobados = JSON.parse(localStorage.getItem("aprobados") || "[]");
-
-            if (ramo.classList.contains("bloqueado")) return;
-
-            if (ramo.classList.contains("aprobado")) {
-                const index = aprobados.indexOf(ramo.id);
-                if (index > -1) aprobados.splice(index, 1);
-            } else {
-                aprobados.push(ramo.id);
-            }
-
-            localStorage.setItem("aprobados", JSON.stringify(aprobados));
-            actualizarEstado();
-        });
+      if (approved.includes(name)) {
+        course.classList.remove("pending", "locked");
+        course.classList.add("approved");
+      } else if (prereqs.length > 0 && !prereqs.every(p => approved.includes(p))) {
+        course.classList.remove("pending", "approved");
+        course.classList.add("locked");
+      } else {
+        course.classList.remove("approved", "locked");
+        course.classList.add("pending");
+      }
     });
+  }
 
-    actualizarEstado();
+  courses.forEach(course => {
+    course.addEventListener("click", () => {
+      if (course.classList.contains("locked")) return;
+
+      const name = course.dataset.name;
+      let approved = JSON.parse(localStorage.getItem("approvedCourses") || "[]");
+
+      if (approved.includes(name)) {
+        approved = approved.filter(c => c !== name);
+      } else {
+        approved.push(name);
+      }
+
+      localStorage.setItem("approvedCourses", JSON.stringify(approved));
+      updateCourseStates();
+    });
+  });
+
+  updateCourseStates();
 });
