@@ -9,8 +9,7 @@ h1 {
 }
 
 #malla-container {
-  display: flex;
-  flex-wrap: wrap;
+ -wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
