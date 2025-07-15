@@ -26,8 +26,56 @@ const ramos = {
     { nombre: "Enfermedades parasitarias", prerequisitos: ["Zoología"] },
     { nombre: "Microbiología general y veterinaria", prerequisitos: ["Biología celular"] },
     { nombre: "Genética", prerequisitos: ["Bioestadística"] }
+  ],
+  "5° semestre": [
+    { nombre: "Reproducción e inseminación artificial", prerequisitos: ["Fisiología animal"] },
+    { nombre: "Semiología" },
+    { nombre: "Fisiopatología", prerequisitos: ["Histoembriología", "Fisiología animal"] },
+    { nombre: "Patología de sistemas" },
+    { nombre: "Inmunología", prerequisitos: ["Microbiología general y veterinaria"] },
+    { nombre: "Enfermedades infecciosas" },
+    { nombre: "Nutrición y alimentación animal", prerequisitos: ["Bioquímica"] },
+    { nombre: "Tecnología de los alimentos", prerequisitos: ["Microbiología general y veterinaria"] },
+    { nombre: "Control de calidad de los alimentos" },
+    { nombre: "Etología y bienestar animal", prerequisitos: ["Zoología"] }
+  ],
+  "6° semestre": [
+    { nombre: "Ginecología y obstetricia", prerequisitos: ["Reproducción e inseminación artificial"] },
+    { nombre: "Producción bovinos carne y leche" },
+    { nombre: "Salud pública" },
+    { nombre: "Producción avícola", prerequisitos: ["Nutrición y alimentación animal", "Etología y bienestar animal"] },
+    { nombre: "Farmacología y toxicología", prerequisitos: ["Fisiología animal"] },
+    { nombre: "Práctica intermedia" },
+    { nombre: "Epidemiología veterinaria", prerequisitos: ["Inmunología"] },
+    { nombre: "Diagnóstico por imágenes", prerequisitos: ["Patología de sistemas"] },
+    { nombre: "Laboratorio clínico", prerequisitos: ["Patología de sistemas"] }
+  ],
+  "7° semestre": [
+    { nombre: "Medicina animales mayores", prerequisitos: ["Laboratorio clínico", "Semiología"] },
+    { nombre: "Medicina de caninos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
+    { nombre: "Medicina de felinos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
+    { nombre: "Medicina de animales exóticos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
+    { nombre: "Producción ovinos y caprinos", prerequisitos: ["Genética"] },
+    { nombre: "Producción porcina", prerequisitos: ["Reproducción e inseminación artificial", "Medio ambiente y gestión ambiental"] },
+    { nombre: "Metodología de investigación", prerequisitos: ["Epidemiología veterinaria", "Salud pública"] },
+    { nombre: "Cirugía general", prerequisitos: ["Semiología", "Farmacología y toxicología", "Fisiopatología", "Anatomía comparada"] },
+    { nombre: "Práctica final", prerequisitos: ["Farmacología y toxicología", "Enfermedades infecciosas"] }
+  ],
+  "8° semestre": [
+    { nombre: "Clínica de animales mayores", prerequisitos: ["Medicina animales mayores", "Diagnóstico por imágenes"] },
+    { nombre: "Clínica de animales menores", prerequisitos: ["Medicina de caninos", "Diagnóstico por imágenes"] },
+    { nombre: "Patología quirúrgica", prerequisitos: ["Cirugía general"] }
+  ],
+  "9° semestre": [
+    { nombre: "Formulación y evaluación de proyectos agropecuarios", prerequisitos: ["Administración y emprendimiento veterinario"] },
+    { nombre: "Producción acuícola", prerequisitos: ["Nutrición y alimentación animal"] },
+    { nombre: "Trabajo de titulación", prerequisitos: ["Metodología de investigación"] }
+  ],
+  "10° semestre": [
+    { nombre: "Farmacología aplicada", prerequisitos: ["Medicina de caninos", "Medicina animales mayores"] },
+    { nombre: "Clínica de animales mayores", prerequisitos: ["Medicina animales mayores", "Diagnóstico por imágenes"] },
+    { nombre: "Clínica de animales menores", prerequisitos: ["Medicina de caninos", "Diagnóstico por imágenes"] }
   ]
-  // Puedes continuar agregando los semestres restantes aquí
 };
 
 const aprobados = new Set();
@@ -76,4 +124,5 @@ function crearMalla() {
 }
 
 crearMalla();
+
 
