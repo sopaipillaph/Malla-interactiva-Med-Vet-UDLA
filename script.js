@@ -1,122 +1,117 @@
-const ramos = {
-  "1° semestre": [
-    { nombre: "Matemática general" },
-    { nombre: "Taller de comunicación oral y escrita" },
-    { nombre: "Introducción a la medicina veterinaria" },
-    { nombre: "Biología celular" },
-    { nombre: "Química" }
-  ],
-  "2° semestre": [
-    { nombre: "Bioestadística", prerequisitos: ["Matemática general"] },
-    { nombre: "Inglés 1" },
-    { nombre: "Anatomía del canino" },
-    { nombre: "Histoembriología" },
-    { nombre: "Bioquímica", prerequisitos: ["Química"] }
-  ],
-  "3° semestre": [
-    { nombre: "Inglés 2", prerequisitos: ["Inglés 1"] },
-    { nombre: "Anatomía comparada", prerequisitos: ["Anatomía del canino"] },
-    { nombre: "Zoología", prerequisitos: ["Biología celular", "Histoembriología"] },
-    { nombre: "Medio ambiente y gestión ambiental", prerequisitos: ["Biología celular"] },
-    { nombre: "Práctica básica", prerequisitos: ["Introducción a la medicina veterinaria", "Anatomía del canino"] }
-  ],
-  "4° semestre": [
-    { nombre: "Administración y emprendimiento veterinario" },
-    { nombre: "Fisiología animal", prerequisitos: ["Bioquímica", "Anatomía del canino"] },
-    { nombre: "Enfermedades parasitarias", prerequisitos: ["Zoología"] },
-    { nombre: "Microbiología general y veterinaria", prerequisitos: ["Biología celular"] },
-    { nombre: "Genética", prerequisitos: ["Bioestadística"] }
-  ],
-  "5° semestre": [
-    { nombre: "Reproducción e inseminación artificial", prerequisitos: ["Fisiología animal"] },
-    { nombre: "Fisiopatología", prerequisitos: ["Histoembriología", "Fisiología animal"] },
-    { nombre: "Inmunología", prerequisitos: ["Microbiología general y veterinaria"] },
-    { nombre: "Nutrición y alimentación animal", prerequisitos: ["Bioquímica"] },
-    { nombre: "Tecnología de los alimentos", prerequisitos: ["Microbiología general y veterinaria"] },
-    { nombre: "Etología y bienestar animal", prerequisitos: ["Zoología"] },
-    { nombre: "Ginecología y obstetricia", prerequisitos: ["Reproducción e inseminación artificial"] },
-    { nombre: "Control de calidad de los alimentos", prerequisitos: ["Enfermedades parasitarias", "Tecnología de los alimentos"] },
-    { nombre: "Producción avícola", prerequisitos: ["Nutrición y alimentación animal"] }
-  ],
-  "6° semestre": [
-    { nombre: "Farmacología y toxicología", prerequisitos: ["Fisiología animal"] },
-    { nombre: "Enfermedades infecciosas", prerequisitos: ["Inmunología"] },
-    { nombre: "Patología de sistemas", prerequisitos: ["Fisiopatología"] }
-  ],
-  "7° semestre": [
-    { nombre: "Laboratorio clínico", prerequisitos: ["Patología de sistemas"] },
-    { nombre: "Producción ovinos y caprinos", prerequisitos: ["Genética"] },
-    { nombre: "Producción porcina", prerequisitos: ["Reproducción e inseminación artificial", "Medio ambiente y gestión ambiental"] },
-    { nombre: "Epidemiología veterinaria", prerequisitos: ["Enfermedades infecciosas"] },
-    { nombre: "Semiología", prerequisitos: ["Farmacología y toxicología", "Fisiopatología", "Anatomía comparada"] },
-    { nombre: "Práctica intermedia", prerequisitos: ["Farmacología y toxicología", "Enfermedades infecciosas"] }
-  ],
-  "8° semestre": [
-    { nombre: "Medicina animales mayores", prerequisitos: ["Laboratorio clínico", "Semiología"] },
-    { nombre: "Medicina de caninos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
-    { nombre: "Medicina de felinos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
-    { nombre: "Medicina de animales exóticos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
-    { nombre: "Cirugía general", prerequisitos: ["Semiología"] }
-  ],
-  "9° semestre": [
-    { nombre: "Formulación y evaluación de proyectos agropecuarios", prerequisitos: ["Administración y emprendimiento veterinario"] },
-    { nombre: "Patología quirúrgica", prerequisitos: ["Cirugía general"] },
-    { nombre: "Diagnóstico por imágenes", prerequisitos: ["Patología de sistemas"] },
-    { nombre: "Producción acuícola", prerequisitos: ["Nutrición y alimentación animal"] },
-    { nombre: "Producción bovinos carne y leche", prerequisitos: ["Ginecología y obstetricia"] },
-    { nombre: "Metodología de investigación", prerequisitos: ["Epidemiología veterinaria"] },
-    { nombre: "Práctica final", prerequisitos: ["Práctica intermedia"] }
-  ],
-  "10° semestre": [
-    { nombre: "Farmacología aplicada", prerequisitos: ["Medicina de caninos", "Medicina animales mayores"] },
-    { nombre: "Salud pública", prerequisitos: ["Control de calidad de los alimentos", "Epidemiología veterinaria"] },
-    { nombre: "Trabajo de titulación", prerequisitos: ["Metodología de investigación"] },
-    { nombre: "Clínica de animales mayores", prerequisitos: ["Medicina animales mayores", "Diagnóstico por imágenes"] },
-    { nombre: "Clínica de animales menores", prerequisitos: ["Medicina de caninos", "Diagnóstico por imágenes"] }
-  ]
-};
+const ramos = [
+  // 1° semestre
+  { id: "matematica", nombre: "Matemática general", req: [] },
+  { id: "comunicacion", nombre: "Taller de comunicación oral y escrita", req: [] },
+  { id: "intro_vet", nombre: "Introducción a la medicina veterinaria", req: [] },
+  { id: "biocelular", nombre: "Biología celular", req: [] },
+  { id: "quimica", nombre: "Química", req: [] },
+
+  // 2° semestre
+  { id: "bioestadistica", nombre: "Bioestadística", req: ["matematica"] },
+  { id: "ingles1", nombre: "Inglés 1", req: [] },
+  { id: "anat_canino", nombre: "Anatomía del canino", req: [] },
+  { id: "histo", nombre: "Histoembriología", req: [] },
+  { id: "bioquimica", nombre: "Bioquímica", req: ["quimica"] },
+
+  // 3° semestre
+  { id: "ingles2", nombre: "Inglés 2", req: ["ingles1"] },
+  { id: "anat_comparada", nombre: "Anatomía comparada", req: ["anat_canino"] },
+  { id: "zoologia", nombre: "Zoología", req: [] },
+  { id: "medioambiente", nombre: "Medio ambiente y gestión ambiental", req: ["biocelular"] },
+  { id: "practica_basica", nombre: "Práctica básica", req: ["intro_vet", "anat_canino"] },
+
+  // 4° semestre
+  { id: "admin_vet", nombre: "Administración y emprendimiento veterinario", req: [] },
+  { id: "fisiologia", nombre: "Fisiología animal", req: ["bioquimica", "anat_canino"] },
+  { id: "parasitarias", nombre: "Enfermedades parasitarias", req: ["zoologia"] },
+  { id: "microbiologia", nombre: "Microbiología general y veterinaria", req: ["biocelular"] },
+  { id: "genetica", nombre: "Genética", req: ["bioestadistica"] },
+
+  // 5° semestre
+  { id: "reproduccion", nombre: "Reproducción e inseminación artificial", req: ["fisiologia"] },
+  { id: "fisiopato", nombre: "Fisiopatología", req: ["histo", "fisiologia"] },
+  { id: "inmunologia", nombre: "Inmunología", req: ["microbiologia"] },
+  { id: "nutricion", nombre: "Nutrición y alimentación animal", req: ["bioquimica"] },
+  { id: "tecnologia_alimentos", nombre: "Tecnología de los alimentos", req: ["microbiologia"] },
+  { id: "etologia", nombre: "Etología y bienestar animal", req: ["zoologia"] },
+  { id: "ginecologia", nombre: "Ginecología y obstetricia", req: ["reproduccion"] },
+  { id: "control_calidad", nombre: "Control de calidad de los alimentos", req: ["parasitarias", "tecnologia_alimentos"] },
+  { id: "avicola", nombre: "Producción avícola", req: ["nutricion"] },
+
+  // 6° semestre
+  { id: "farmacologia", nombre: "Farmacología y toxicología", req: ["etologia", "fisiologia"] },
+  { id: "infecciosas", nombre: "Enfermedades infecciosas", req: ["inmunologia"] },
+  { id: "patologia", nombre: "Patología de sistemas", req: ["fisiopato"] },
+
+  // 7° semestre
+  { id: "lab_clinico", nombre: "Laboratorio clínico", req: ["patologia"] },
+  { id: "ovinos", nombre: "Producción ovinos y caprinos", req: ["genetica"] },
+  { id: "porcina", nombre: "Producción porcina", req: ["reproduccion", "medioambiente"] },
+  { id: "epidemiologia", nombre: "Epidemiología veterinaria", req: ["infecciosas"] },
+  { id: "semiologia", nombre: "Semiología", req: ["farmacologia", "fisiopato", "anat_comparada"] },
+  { id: "practica_intermedia", nombre: "Práctica intermedia", req: ["farmacologia", "infecciosas"] },
+
+  // 8° semestre
+  { id: "med_mayores", nombre: "Medicina animales mayores", req: ["lab_clinico", "semiologia"] },
+  { id: "med_caninos", nombre: "Medicina de caninos", req: ["lab_clinico", "semiologia"] },
+  { id: "med_felinos", nombre: "Medicina de felinos", req: ["lab_clinico", "semiologia"] },
+  { id: "med_exoticos", nombre: "Medicina de animales exóticos", req: ["lab_clinico", "semiologia"] },
+  { id: "cirugia", nombre: "Cirugía general", req: ["semiologia"] },
+
+  // 9° semestre
+  { id: "formulacion", nombre: "Formulación y evaluación de proyectos agropecuarios", req: ["admin_vet"] },
+  { id: "pat_quirurgica", nombre: "Patología quirúrgica", req: ["cirugia"] },
+  { id: "diagnostico_img", nombre: "Diagnóstico por imágenes", req: ["patologia"] },
+  { id: "acuicola", nombre: "Producción acuícola", req: ["nutricion"] },
+  { id: "bovinos", nombre: "Producción bovinos carne y leche", req: ["ginecologia"] },
+  { id: "metodologia", nombre: "Metodología de investigación", req: ["epidemiologia"] },
+  { id: "practica_final", nombre: "Práctica final", req: ["practica_intermedia"] },
+
+  // 10° semestre
+  { id: "farmaco_aplicada", nombre: "Farmacología aplicada", req: ["med_caninos", "med_mayores"] },
+  { id: "salud_publica", nombre: "Salud pública", req: ["control_calidad", "epidemiologia"] },
+  { id: "titulacion", nombre: "Trabajo de titulación", req: ["metodologia"] },
+  { id: "clinica_mayores", nombre: "Clínica de animales mayores", req: ["med_mayores", "diagnostico_img"] },
+  { id: "clinica_menores", nombre: "Clínica de animales menores", req: ["med_caninos", "diagnostico_img"] },
+];
 
 const aprobados = new Set();
 
-function crearMalla() {
-  const container = document.getElementById("malla-container");
-  container.innerHTML = "";
-
-  for (const [semestre, listaRamos] of Object.entries(ramos)) {
-    const divSemestre = document.createElement("div");
-    divSemestre.className = "semestre";
-    divSemestre.innerHTML = `<h2>${semestre}</h2>`;
-
-    listaRamos.forEach(ramo => {
-      const divRamo = document.createElement("div");
-      divRamo.className = "ramo";
-      divRamo.textContent = ramo.nombre;
-
-      const requisitos = ramo.prerequisitos || [];
-      const bloqueado = requisitos.some(req => !aprobados.has(req));
-
-      if (bloqueado) {
-        divRamo.classList.add("bloqueado");
-      } else {
-        divRamo.addEventListener("click", () => {
-          if (aprobados.has(ramo.nombre)) {
-            aprobados.delete(ramo.nombre);
-          } else {
-            aprobados.add(ramo.nombre);
-          }
-          crearMalla(); // Recargar para actualizar estados
-        });
-      }
-
-      if (aprobados.has(ramo.nombre)) {
-        divRamo.classList.add("aprobado");
-      }
-
-      divSemestre.appendChild(divRamo);
-    });
-
-    container.appendChild(divSemestre);
-  }
+function crearRamo(ramo) {
+  const div = document.createElement("div");
+  div.className = "ramo locked";
+  div.id = ramo.id;
+  div.textContent = ramo.nombre;
+  div.onclick = () => aprobarRamo(ramo.id);
+  return div;
 }
 
-crearMalla();
+function aprobarRamo(id) {
+  const ramo = ramos.find(r => r.id === id);
+  const div = document.getElementById(id);
+  if (div.classList.contains("locked") || div.classList.contains("approved")) return;
+
+  div.classList.add("approved");
+  aprobados.add(id);
+  actualizarEstado();
+}
+
+function actualizarEstado() {
+  ramos.forEach(ramo => {
+    const div = document.getElementById(ramo.id);
+    if (aprobados.has(ramo.id)) return;
+    if (!ramo.req || ramo.req.every(pr => aprobados.has(pr))) {
+      div.classList.remove("locked");
+    } else {
+      div.classList.add("locked");
+    }
+  });
+}
+
+function init() {
+  const contenedor = document.getElementById("malla");
+  ramos.forEach(ramo => contenedor.appendChild(crearRamo(ramo)));
+  actualizarEstado();
+}
+
+window.onload = init;
