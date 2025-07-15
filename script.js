@@ -33,16 +33,16 @@ const ramosPorSemestre = {
     { id: "inmunologia", nombre: "Inmunología", req: ["microbiologia"] },
     { id: "nutricion", nombre: "Nutrición y alimentación animal", req: ["bioquimica"] },
     { id: "tecnologia_alimentos", nombre: "Tecnología de los alimentos", req: ["microbiologia"] },
-    { id: "etologia", nombre: "Etología y bienestar animal", req: ["zoologia"] },  
-    { id: "ginecologia", nombre: "Ginecología y obstetricia", req: ["reproduccion"] },
-    { id: "control_calidad", nombre: "Control de calidad de los alimentos", req: ["parasitarias", "tecnologia_alimentos"] },
-    { id: "avicola", nombre: "Producción avícola", req: ["nutricion"] }
+    { id: "etologia", nombre: "Etología y bienestar animal", req: ["zoologia"] }
   ],
   6: [
-    { id: "farmacologia", nombre: "Farmacología y toxicología", req: ["etologia", "fisiologia"] },
-    { id: "infecciosas", nombre: "Enfermedades infecciosas", req: ["inmunologia"] },
-    { id: "patologia", nombre: "Patología de sistemas", req: ["fisiopato"] },
-  ],
+  { id: "farmacologia", nombre: "Farmacología y toxicología", req: ["etologia", "fisiologia"] },
+  { id: "infecciosas", nombre: "Enfermedades infecciosas", req: ["inmunologia"] },
+  { id: "patologia", nombre: "Patología de sistemas", req: ["fisiopato"] },
+  { id: "ginecologia", nombre: "Ginecología y obstetricia", req: ["reproduccion"] },
+  { id: "control_calidad", nombre: "Control de calidad de los alimentos", req: ["parasitarias", "tecnologia_alimentos"] },
+  { id: "avicola", nombre: "Producción avícola", req: ["nutricion"] }
+],
   7: [
     { id: "lab_clinico", nombre: "Laboratorio clínico", req: ["patologia"] },
     { id: "ovinos", nombre: "Producción ovinos y caprinos", req: ["genetica"] },
