@@ -1,103 +1,69 @@
-:root {
-  --color-pendiente: #ffc0cb;   /* Rosado */
-  --color-aprobado: #9370db;   /* Morado */
-  --color-bloqueado: #c0c0c0;  /* Gris */
-}
-
-* {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
   margin: 0;
-  padding: 0;
-  background: #fafafa;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
   color: #333;
+  margin-bottom: 20px;
 }
 
-header {
+.instrucciones {
   text-align: center;
-  padding: 20px;
-  background: #6d44b8;
-  color: white;
-}
-
-header h1 {
-  margin-bottom: 10px;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #eee;
-  margin-top: 30px;
-}
-
-footer button {
-  background: #db7093;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-footer button:hover {
-  background: #b95f7e;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #666;
 }
 
 .malla-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 30px 10px;
   gap: 20px;
+  padding-bottom: 50px;
 }
 
 .semestre {
-  background: white;
   border: 2px solid #ccc;
-  border-radius: 12px;
-  width: 280px;
+  background-color: #ffffff;
+  border-radius: 10px;
   padding: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
-}
-
-.semestre:hover {
-  transform: scale(1.02);
+  width: 280px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .semestre h2 {
+  font-size: 18px;
   text-align: center;
-  margin-bottom: 10px;
   color: #6d44b8;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
 }
 
 .ramo {
-  background-color: var(--color-pendiente);
-  margin: 6px 0;
+  background-color: #ffc0cb; /* rosado por defecto */
   padding: 8px 10px;
+  margin: 6px 0;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease;
   font-size: 14px;
-  line-height: 1.4;
-  user-select: none;
+  line-height: 1.3;
 }
 
 .ramo.aprobado {
-  background-color: var(--color-aprobado);
-  color: white;
+  background-color: #9370db; /* morado */
   text-decoration: line-through;
-  font-weight: bold;
+  color: #fff;
 }
 
 .ramo.bloqueado {
-  background-color: var(--color-bloqueado);
-  color: #666;
+  background-color: #d3d3d3;
+  color: #777;
   cursor: not-allowed;
   font-style: italic;
 }
