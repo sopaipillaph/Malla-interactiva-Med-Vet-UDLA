@@ -20,28 +20,33 @@ h1 {
 .ramo {
   background-color: #9b9b9b;
   color: white;
-  padding: 10px;
-  margin: 5px 0;
+  padding: 10px 15px;
+  margin: 6px 0;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
+  font-weight: bold;
 }
 
+/* Cuando el ramo ha sido aprobado */
 .ramo.aprobado {
   background-color: #ff69b4;
   text-decoration: line-through;
 }
 
+/* Cuando el ramo está bloqueado por prerequisitos */
 .ramo.bloqueado {
   background-color: #666666;
   cursor: not-allowed;
 }
 
+/* Ícono de candado en ramos bloqueados */
 .ramo.bloqueado::after {
   content: "🔒";
   position: absolute;
-  right: 10px;
-  top: 10px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
 }
-
