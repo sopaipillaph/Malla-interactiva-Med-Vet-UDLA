@@ -110,16 +110,24 @@ function actualizarEstado() {
 
 function init() {
   const contenedor = document.getElementById("malla");
+
   Object.entries(ramosPorSemestre).forEach(([semestre, ramos]) => {
+    const bloque = document.createElement("div");
+    bloque.className = "bloque-semestre";
+
     const h2 = document.createElement("h2");
-    h2.textContent = `${semestre}° Semestre`;
-    contenedor.appendChild(h2);
+    h2.textContent = `Semestre ${semestre}`;
+    bloque.appendChild(h2);
 
     const fila = document.createElement("div");
     fila.className = "semestre";
+
     ramos.forEach(ramo => fila.appendChild(crearRamo(ramo)));
-    contenedor.appendChild(fila);
+    bloque.appendChild(fila);
+
+    contenedor.appendChild(bloque);
   });
+
   actualizarEstado();
 }
 
