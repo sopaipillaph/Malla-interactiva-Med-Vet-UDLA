@@ -1,29 +1,43 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-  const ramos = document.querySelectorAll(".ramo");
+document.addEventListener("DOMContentLoaded", function () {
+    const ramos = document.querySelectorAll(".ramo");
 
-  function updateStates() {
+    function actualizarEstado() {
+        ramos.forEach(ramo => {
+            const prereqs = ramo.dataset.prerrequisitos.split(",").filter(p => p);
+            const aprobados = JSON.parse(localStorage.getItem("aprobados") || "[]");
+
+            const todosAprobados = prereqs.every(p => aprobados.includes(p));
+            if (!todosAprobados && prereqs.length > 0 && !aprobados.includes(ramo.id)) {
+                ramo.classList.add("bloqueado");
+                ramo.classList.remove("pendiente", "aprobado");
+            } else if (aprobados.includes(ramo.id)) {
+                ramo.classList.add("aprobado");
+                ramo.classList.remove("pendiente", "bloqueado");
+            } else {
+                ramo.classList.add("pendiente");
+                ramo.classList.remove("aprobado", "bloqueado");
+            }
+        });
+    }
+
     ramos.forEach(ramo => {
-      const prereqs = ramo.dataset.prereqs ? ramo.dataset.prereqs.split(",") : [];
-      const allApproved = prereqs.every(id => document.getElementById(id)?.classList.contains("aprobado"));
-      if (prereqs.length > 0 && !allApproved && !ramo.classList.contains("aprobado")) {
-        ramo.classList.add("bloqueado");
-        ramo.classList.remove("pendiente");
-      } else if (!ramo.classList.contains("aprobado")) {
-        ramo.classList.remove("bloqueado");
-        ramo.classList.add("pendiente");
-      }
-    });
-  }
+        ramo.addEventListener("click", function () {
+            const aprobados = JSON.parse(localStorage.getItem("aprobados") || "[]");
 
-  ramos.forEach(ramo => {
-    ramo.addEventListener("click", () => {
-      if (ramo.classList.contains("bloqueado")) return;
-      ramo.classList.toggle("aprobado");
-      ramo.classList.toggle("pendiente");
-      updateStates();
-    });
-  });
+            if (ramo.classList.contains("bloqueado")) return;
 
-  updateStates();
+            if (ramo.classList.contains("aprobado")) {
+                const index = aprobados.indexOf(ramo.id);
+                if (index > -1) aprobados.splice(index, 1);
+            } else {
+                aprobados.push(ramo.id);
+            }
+
+            localStorage.setItem("aprobados", JSON.stringify(aprobados));
+            actualizarEstado();
+        });
+    });
+
+    actualizarEstado();
 });
