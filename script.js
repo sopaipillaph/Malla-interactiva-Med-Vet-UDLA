@@ -38,7 +38,7 @@ const ramosPorSemestre = {
   6: [
     { id: "farmacologia", nombre: "Farmacología y toxicología", req: ["etologia", "fisiologia"] },
     { id: "infecciosas", nombre: "Enfermedades infecciosas", req: ["inmunologia"] },
-    { id: "patologia", nombre: "Patología de sistemas", req: ["fisiopato"] }
+    { id: "patologia", nombre: "Patología de sistemas", req: ["fisiopato"] },
     { id: "ginecologia", nombre: "Ginecología y obstetricia", req: ["reproduccion"] },
     { id: "control_calidad", nombre: "Control de calidad de los alimentos", req: ["parasitarias", "tecnologia_alimentos"] },
     { id: "avicola", nombre: "Producción avícola", req: ["nutricion"] }
