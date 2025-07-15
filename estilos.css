@@ -1,52 +1,103 @@
-body {
-  font-family: sans-serif;
-  background: #fdfdfd;
-  padding: 20px;
-  margin: 0;
+:root {
+  --color-pendiente: #ffc0cb;   /* Rosado */
+  --color-aprobado: #9370db;   /* Morado */
+  --color-bloqueado: #c0c0c0;  /* Gris */
 }
 
-h1 {
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  color: #333;
+}
+
+header {
   text-align: center;
-  margin-bottom: 30px;
+  padding: 20px;
+  background: #6d44b8;
+  color: white;
+}
+
+header h1 {
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #eee;
+  margin-top: 30px;
+}
+
+footer button {
+  background: #db7093;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+footer button:hover {
+  background: #b95f7e;
 }
 
 .malla-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 30px 10px;
   gap: 20px;
 }
 
 .semestre {
+  background: white;
   border: 2px solid #ccc;
-  padding: 10px;
-  width: 250px;
-  background: #f3f3f3;
-  border-radius: 10px;
+  border-radius: 12px;
+  width: 280px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.semestre:hover {
+  transform: scale(1.02);
 }
 
 .semestre h2 {
   text-align: center;
+  margin-bottom: 10px;
+  color: #6d44b8;
 }
 
 .ramo {
-  background-color: #ffc0cb; /* rosado */
-  padding: 8px;
-  margin: 5px 0;
-  border-radius: 5px;
+  background-color: var(--color-pendiente);
+  margin: 6px 0;
+  padding: 8px 10px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 14px;
+  line-height: 1.4;
   user-select: none;
-  transition: all 0.2s;
 }
 
 .ramo.aprobado {
-  background-color: #9370db; /* morado */
-  text-decoration: line-through;
+  background-color: var(--color-aprobado);
   color: white;
+  text-decoration: line-through;
+  font-weight: bold;
 }
 
 .ramo.bloqueado {
-  background-color: #cccccc;
-  cursor: not-allowed;
+  background-color: var(--color-bloqueado);
   color: #666;
+  cursor: not-allowed;
+  font-style: italic;
 }
