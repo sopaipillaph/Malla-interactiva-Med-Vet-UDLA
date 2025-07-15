@@ -1,4 +1,3 @@
-
 const ramos = {
   "1° semestre": [
     { nombre: "Matemática general" },
