@@ -1,3 +1,4 @@
+
 const ramos = {
   "1° semestre": [
     { nombre: "Matemática general" },
@@ -51,8 +52,8 @@ const ramos = {
     { nombre: "Laboratorio clínico", prerequisitos: ["Patología de sistemas"] }
   ],
   "7° semestre": [
-    { nombre: "Medicina animales mayores", prerequisitos: ["Laboratorio clínico", "Semiología"] },
-    { nombre: "Medicina de caninos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
+    { nombre: "Medicina animales mayores", prerequisitos: ["Laboratorio clínico", "Semiología", "Farmacología y toxicología", "Fisiopatología", "Anatomía comparada"] },
+    { nombre: "Medicina de caninos", prerequisitos: ["Laboratorio clínico", "Semiología", "Farmacología y toxicología", "Fisiopatología", "Anatomía comparada"] },
     { nombre: "Medicina de felinos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
     { nombre: "Medicina de animales exóticos", prerequisitos: ["Laboratorio clínico", "Semiología"] },
     { nombre: "Producción ovinos y caprinos", prerequisitos: ["Genética"] },
@@ -64,6 +65,7 @@ const ramos = {
   "8° semestre": [
     { nombre: "Clínica de animales mayores", prerequisitos: ["Medicina animales mayores", "Diagnóstico por imágenes"] },
     { nombre: "Clínica de animales menores", prerequisitos: ["Medicina de caninos", "Diagnóstico por imágenes"] },
+    { nombre: "Farmacología aplicada", prerequisitos: ["Medicina de caninos", "Medicina animales mayores"] },
     { nombre: "Patología quirúrgica", prerequisitos: ["Cirugía general"] }
   ],
   "9° semestre": [
@@ -72,9 +74,9 @@ const ramos = {
     { nombre: "Trabajo de titulación", prerequisitos: ["Metodología de investigación"] }
   ],
   "10° semestre": [
-    { nombre: "Farmacología aplicada", prerequisitos: ["Medicina de caninos", "Medicina animales mayores"] },
     { nombre: "Clínica de animales mayores", prerequisitos: ["Medicina animales mayores", "Diagnóstico por imágenes"] },
-    { nombre: "Clínica de animales menores", prerequisitos: ["Medicina de caninos", "Diagnóstico por imágenes"] }
+    { nombre: "Clínica de animales menores", prerequisitos: ["Medicina de caninos", "Diagnóstico por imágenes"] },
+    { nombre: "Salud pública", prerequisitos: ["Control de calidad de los alimentos", "Epidemiología veterinaria"] }
   ]
 };
 
@@ -104,6 +106,7 @@ function crearMalla() {
 
         if (!divRamo.classList.contains("aprobado")) {
           divRamo.classList.add("aprobado");
+          divRamo.classList.remove("confirmado");
           aprobados.add(ramo.nombre);
         } else if (!divRamo.classList.contains("confirmado")) {
           divRamo.classList.remove("aprobado");
