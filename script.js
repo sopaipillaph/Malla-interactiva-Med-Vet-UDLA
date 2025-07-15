@@ -1,88 +1,79 @@
-const malla = {
-  "1° Semestre": [
-    { nombre: "Matemática general", prerrequisitos: [] },
-    { nombre: "Taller de comunicación oral y escrita", prerrequisitos: [] },
-    { nombre: "Introducción a la medicina veterinaria", prerrequisitos: [] },
-    { nombre: "Practica básica", prerrequisitos: [] },
-    { nombre: "Biología celular", prerrequisitos: [] },
-    { nombre: "Química", prerrequisitos: [] },
-    { nombre: "Bioquímica", prerrequisitos: ["Química"] }
+const ramos = {
+  "1° semestre": [
+    { nombre: "Matemática general" },
+    { nombre: "Taller de comunicación oral y escrita" },
+    { nombre: "Introducción a la medicina veterinaria" },
+    { nombre: "Biología celular" },
+    { nombre: "Química" }
   ],
-  "2° Semestre": [
-    { nombre: "Bioestadística", prerrequisitos: ["Matemática general"] },
-    { nombre: "Genética", prerrequisitos: [] },
-    { nombre: "Inglés 1", prerrequisitos: [] },
-    { nombre: "Inglés 2", prerrequisitos: ["Inglés 1"] },
-    { nombre: "Anatomía del canino", prerrequisitos: [] },
-    { nombre: "Histoembriología", prerrequisitos: [] }
+  "2° semestre": [
+    { nombre: "Bioestadística", prerequisitos: ["Matemática general"] },
+    { nombre: "Inglés 1" },
+    { nombre: "Anatomía del canino" },
+    { nombre: "Histoembriología" },
+    { nombre: "Bioquímica", prerequisitos: ["Química"] }
   ],
-  "3° Semestre": [
-    { nombre: "Anatomía comparada", prerrequisitos: ["Anatomía del canino"] },
-    { nombre: "Semiología", prerrequisitos: [] },
-    { nombre: "Zoología", prerrequisitos: [] },
-    { nombre: "Producción porcina", prerrequisitos: [] },
-    { nombre: "Medio ambiente y gestión ambiental", prerrequisitos: [] },
-    { nombre: "Práctica básica", prerrequisitos: ["Introducción a la medicina veterinaria", "Anatomía del canino"] }
+  "3° semestre": [
+    { nombre: "Inglés 2", prerequisitos: ["Inglés 1"] },
+    { nombre: "Anatomía comparada", prerequisitos: ["Anatomía del canino"] },
+    { nombre: "Zoología", prerequisitos: ["Biología celular", "Histoembriología"] },
+    { nombre: "Medio ambiente y gestión ambiental", prerequisitos: ["Biología celular"] },
+    { nombre: "Práctica básica", prerequisitos: ["Introducción a la medicina veterinaria", "Anatomía del canino"] }
+  ],
+  "4° semestre": [
+    { nombre: "Administración y emprendimiento veterinario" },
+    { nombre: "Fisiología animal", prerequisitos: ["Bioquímica", "Anatomía del canino"] },
+    { nombre: "Enfermedades parasitarias", prerequisitos: ["Zoología"] },
+    { nombre: "Microbiología general y veterinaria", prerequisitos: ["Biología celular"] },
+    { nombre: "Genética", prerequisitos: ["Bioestadística"] }
   ]
+  // Puedes continuar agregando los semestres restantes aquí
 };
 
-let aprobados = new Set();
+const aprobados = new Set();
 
 function crearMalla() {
-  const contenedor = document.getElementById("malla-container");
+  const container = document.getElementById("malla-container");
+  container.innerHTML = "";
 
-  for (const [semestre, ramos] of Object.entries(malla)) {
+  for (const [semestre, asignaturas] of Object.entries(ramos)) {
     const divSemestre = document.createElement("div");
     divSemestre.className = "semestre";
+    divSemestre.innerHTML = `<h2>${semestre}</h2>`;
 
-    const h2 = document.createElement("h2");
-    h2.textContent = semestre;
-    divSemestre.appendChild(h2);
-
-    ramos.forEach(ramo => {
+    asignaturas.forEach(ramo => {
       const divRamo = document.createElement("div");
       divRamo.className = "ramo";
       divRamo.textContent = ramo.nombre;
-      divRamo.dataset.nombre = ramo.nombre;
-      divRamo.dataset.prerequisitos = JSON.stringify(ramo.prerrequisitos);
-      divRamo.addEventListener("click", () => toggleRamo(divRamo));
+
+      const bloqueado = ramo.prerequisitos?.some(pr => !aprobados.has(pr));
+      if (bloqueado) {
+        divRamo.classList.add("bloqueado");
+      }
+
+      divRamo.addEventListener("click", () => {
+        if (divRamo.classList.contains("bloqueado")) return;
+
+        if (!divRamo.classList.contains("aprobado")) {
+          divRamo.classList.add("aprobado");
+          aprobados.add(ramo.nombre);
+        } else if (!divRamo.classList.contains("confirmado")) {
+          divRamo.classList.remove("aprobado");
+          divRamo.classList.add("confirmado");
+        } else {
+          divRamo.classList.remove("confirmado");
+          aprobados.delete(ramo.nombre);
+        }
+
+        crearMalla(); // Recargar para actualizar bloqueos
+      });
+
       divSemestre.appendChild(divRamo);
     });
 
-    contenedor.appendChild(divSemestre);
+    container.appendChild(divSemestre);
   }
-
-  actualizarBloqueos();
 }
 
-function toggleRamo(element) {
-  if (element.classList.contains("bloqueado")) return;
-
-  const nombre = element.dataset.nombre;
-  if (element.classList.contains("aprobado")) {
-    element.classList.remove("aprobado");
-    aprobados.delete(nombre);
-  } else {
-    element.classList.add("aprobado");
-    aprobados.add(nombre);
-  }
-
-  actualizarBloqueos();
-}
-
-function actualizarBloqueos() {
-  document.querySelectorAll(".ramo").forEach(element => {
-    const nombre = element.dataset.nombre;
-    const prerequisitos = JSON.parse(element.dataset.prerequisitos || "[]");
-
-    const faltan = prerequisitos.filter(r => !aprobados.has(r));
-    if (faltan.length > 0 && !aprobados.has(nombre)) {
-      element.classList.add("bloqueado");
-    } else {
-      element.classList.remove("bloqueado");
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", crearMalla);
+crearMalla();
 
