@@ -75,3 +75,48 @@ const ramos = {
     { nombre: "Clínica de animales menores", prerequisitos: ["Medicina de caninos", "Diagnóstico por imágenes"] }
   ]
 };
+
+const aprobados = new Set();
+
+function crearMalla() {
+  const container = document.getElementById("malla-container");
+  container.innerHTML = "";
+
+  for (const [semestre, listaRamos] of Object.entries(ramos)) {
+    const divSemestre = document.createElement("div");
+    divSemestre.className = "semestre";
+    divSemestre.innerHTML = `<h2>${semestre}</h2>`;
+
+    listaRamos.forEach(ramo => {
+      const divRamo = document.createElement("div");
+      divRamo.className = "ramo";
+      divRamo.textContent = ramo.nombre;
+
+      const requisitos = ramo.prerequisitos || [];
+      const bloqueado = requisitos.some(req => !aprobados.has(req));
+
+      if (bloqueado) {
+        divRamo.classList.add("bloqueado");
+      } else {
+        divRamo.addEventListener("click", () => {
+          if (aprobados.has(ramo.nombre)) {
+            aprobados.delete(ramo.nombre);
+          } else {
+            aprobados.add(ramo.nombre);
+          }
+          crearMalla(); // Recargar para actualizar estados
+        });
+      }
+
+      if (aprobados.has(ramo.nombre)) {
+        divRamo.classList.add("aprobado");
+      }
+
+      divSemestre.appendChild(divRamo);
+    });
+
+    container.appendChild(divSemestre);
+  }
+}
+
+crearMalla();
