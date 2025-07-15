@@ -1,18 +1,23 @@
+
 body {
   font-family: Arial, sans-serif;
   background: #fff;
   padding: 20px;
 }
+
 h1 {
   text-align: center;
   color: #c33b80;
 }
+
 .semestre {
   margin-bottom: 30px;
 }
+
 .semestre h2 {
   color: #c33b80;
 }
+
 .ramo {
   display: inline-block;
   background-color: #ffa8d9;
@@ -27,24 +32,27 @@ h1 {
   position: relative;
   transition: all 0.3s ease;
 }
+
 .ramo.aprobado {
   color: #ff69b4;
   text-decoration: line-through;
 }
+
 .ramo.confirmado {
   background-color: #c33b80;
   color: white;
   text-decoration: none;
 }
+
 .ramo.bloqueado {
   background-color: #666666;
   color: white;
   cursor: not-allowed;
 }
+
 .ramo.bloqueado::after {
   content: '🔒';
   position: absolute;
   top: 5px;
   right: 10px;
 }
-
